@@ -1,3 +1,4 @@
+# Variable con la ruta del código fuente
 SRC_DIR = ./src
 INC_DIR = ./inc
 
@@ -16,7 +17,7 @@ all: $(OBJ_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "Compiling $< to $@"
 	@mkdir -p $(OBJ_DIR)
-	@gcc -o $@ -c $< -I $(INC_DIR)
+		gcc -o $@ -c $< $(foreach DIR, $(INC_DIR), -I $(DIR)) -MMD
 
 clean:
 	@rm -rf $(OUT_DIR)

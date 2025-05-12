@@ -17,11 +17,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 SPDX-License-Identifier: MIT
 *********************************************************************************************************************/
 
-#ifndef BAR_H_
-#define BAR_H_
+#ifndef ALUMNO_H_
+#define ALUMNO_H_
 
-/** @file bar.h
- ** @brief Cabeceras del modulo bar
+/** @file alumno.h
+ ** @brief Declaraciones del módulo para la gestión de alumnos
  **/
 
 /* === Headers files inclusions ==================================================================================== */
@@ -34,11 +34,28 @@ extern "C" {
 
 /* === Public macros definitions =================================================================================== */
 
+#include <stdint.h>
+
 /* === Public data type declarations =============================================================================== */
 
+//! Estructura que representa un alumno
+typedef struct alumno_s {
+    char nombre[20];    //!< Nombre del alumno
+    char apellido[20];  //!< Apellido del alumno
+    uint32_t documento; //!< Número de documento del alumno
+} const * alumno_t;
 /* === Public variable declarations ================================================================================ */
 
 /* === Public function declarations ================================================================================ */
+/**
+ * @brief Fuención para serializar los datos de un alumno
+ * 
+ * @param alumno Puntero a la estructura con los datos del alumno
+ * @param buffer Cadena de caracteres donde se almacenarán los datos serializados
+ * @param size Espacio disponible en la cadena de caracteres
+ * @return int Cantidad de caracteres escritos en la cadena de resultado o -1 si hubo un error
+ */
+int Serializar(alumno_t alumno, char buffer[], uint32_t size);
 
 /* === End of conditional blocks =================================================================================== */
 
@@ -46,4 +63,4 @@ extern "C" {
 }
 #endif
 
-#endif /* BAR_H_ */
+#endif /* ALUMNO_H_ */
