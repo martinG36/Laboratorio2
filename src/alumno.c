@@ -72,46 +72,51 @@ static int  SerializarEntero(char campo[], int valor, char buffer[], uint32_t di
 /* === Public function definitions ============================================================================== */
 
 int Serializar(const alumno_t alumno, char buffer[], uint32_t size) {
-    int escritos;
+    int escritos = 0;
     int resultado;
+    char *ptr = buffer;
 
-    buffer[0] = '{';
-    buffer++;
-    escritos = 1;
-    resultado = SerializarCadena("nombre", alumno->nombre, buffer, size - escritos);
-    if (resultado < 0) {
+    if (size < 3)
+    {
         return -1;
     }
-    buffer += resultado;
+
+    *ptr++ = '{';
+    escritos++;
+
+    resultado = SerializarCadena("nombre", alumno->nombre, ptr, size - escritos);
+    if (resultado < 0 || resultado >= (int)(size - escritos))
+    {
+        return -1;
+    }
+    ptr += resultado;
     escritos += resultado;
-    resultado = escritos;
-    
-    escritos += SerializarCadena("aplellido", alumno->apellido, buffer, size - escritos);
-    if (escritos < 0) {
+
+    resultado = SerializarCadena("apellido", alumno->apellido, ptr, size - escritos);
+    if (resultado < 0 || resultado >= (int)(size - escritos))
+    {
         return -1;
     }
-    buffer += escritos - resultado;
+    ptr += resultado;
+    escritos += resultado;
 
-    resultado = escritos;
-
-    escritos += SerializarEntero("documento", alumno->documento, buffer, size - escritos);
-
-    if (escritos < 0) {
+    resultado = SerializarEntero("documento", alumno->documento, ptr, size - escritos);
+    if (resultado < 0 || resultado >= (int)(size - escritos))
+    {
         return -1;
     }
-
-    buffer += escritos - resultado;
+    ptr += resultado;
+    escritos += resultado;
 
     if (size - escritos <= 2)
     {
         return -1;
-    }else{
-        *buffer = '}';
-        buffer++;
-        *buffer = '\0';
-        escritos += 1;
     }
-    
+
+    *ptr++ = '}';
+    *ptr = '\0';
+    escritos++;
+
     return escritos;
 }
 
