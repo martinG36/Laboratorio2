@@ -48,7 +48,7 @@ SPDX-License-Identifier: MIT
 
 int main(void)
 {
-    alumno_t YO = AlumnoCrear("Martín", "Gareca", 43291421);
+    alumno_t YO = AlumnoCrear("Martín", "Gareca", 43291421); // El acento cuenta como dos caracteres, por eso la suma es 61 y no 60
     alumno_t YOnt = AlumnoCrear("Pepe", "Ganem", 12345678);
     char buffer[100];
     int resultado;
