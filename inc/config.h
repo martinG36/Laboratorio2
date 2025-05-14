@@ -17,59 +17,22 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 SPDX-License-Identifier: MIT
 *********************************************************************************************************************/
 
-#ifndef ALUMNO_H_
-#define ALUMNO_H_
-
-/** @file alumno.h
- ** @brief Declaraciones del módulo para la gestión de alumnos
- **/
-
 /* === Headers files inclusions ==================================================================================== */
 
 /* === Header for C++ compatibility ================================================================================ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /* === Public macros definitions =================================================================================== */
 
-#include <stdint.h>
+#ifndef ALUMNOS_MAX_INSTANCIAS // Si está definido en el make, no se redefine
+#define ALUMNOS_MAX_INSTANCIAS 2 // Cantidad máxima de alumnos que se pueden crear
+#endif
+
+#define USAR_MEMORIA_DINAMICA // Definir para usar memoria dinámica
 
 /* === Public data type declarations =============================================================================== */
-
-//! Estructura que representa un alumno
-
-typedef struct alumno_s * alumno_t;
 
 /* === Public variable declarations ================================================================================ */
 
 /* === Public function declarations ================================================================================ */
 
-/**
- * @brief Función para crear un nuevo alumno
- * 
- * @param nombre Nombre del alumno
- * @param apellido Apellido del alumno
- * @param documento Documento de identidad del alumno
- * @return alumno_t Referencia al nuevo alumno creado
- */
-alumno_t AlumnoCrear(char * nombre, char * apellido, uint32_t documento);
-
-/**
- * @brief Fuención para serializar los datos de un alumno
- * 
- * @param alumno Referencia al alumno a serializar
- * @param buffer Cadena de caracteres donde se almacenarán los datos serializados
- * @param size Espacio disponible en la cadena de caracteres
- * @return int Cantidad de caracteres escritos en la cadena de resultado o -1 si hubo un error
- */
-int AlumnoSerializar(alumno_t alumno, char buffer[], uint32_t size);
-
 /* === End of conditional blocks =================================================================================== */
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* ALUMNO_H_ */

@@ -17,7 +17,7 @@ all: $(OBJ_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "Compiling $< to $@"
 	@mkdir -p $(OBJ_DIR)
-		gcc -o $@ -c $< $(foreach DIR, $(INC_DIR), -I $(DIR)) -MMD
+		gcc -o $@ -c $< $(foreach DIR, $(INC_DIR), -I $(DIR)) -MMD -D ALUMNOS_MAX_INSTANCIAS=4
 
 clean:
 	@rm -rf $(OUT_DIR)

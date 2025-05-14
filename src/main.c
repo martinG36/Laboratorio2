@@ -34,11 +34,12 @@ SPDX-License-Identifier: MIT
 
 /* === Private variable definitions ================================================================================ */
 
-static struct alumno_s YO = {
-    .nombre = "Martín",
-    .apellido = "Gareca",
-    .documento = 43291421
-};
+//static struct alumno_s YO = {
+//    .nombre = "Martín",
+//    .apellido = "Gareca",
+//    .documento = 43291421
+//};
+
 /* === Public variable definitions ================================================================================= */
 
 /* === Private function definitions ================================================================================ */
@@ -47,10 +48,16 @@ static struct alumno_s YO = {
 
 int main(void)
 {
+    alumno_t YO = AlumnoCrear("Martín", "Gareca", 43291421);
     char buffer[100];
     int resultado;
 
-    resultado = Serializar(&YO, buffer, sizeof(buffer));
+    if (YO == NULL) {
+        printf("Error al crear el alumno\n");
+        return -1;
+    }
+    
+    resultado = AlumnoSerializar(YO, buffer, sizeof(buffer));
     
     if (resultado > 0) {
         printf("Serializado: %s\n", buffer);
