@@ -49,16 +49,27 @@ SPDX-License-Identifier: MIT
 int main(void)
 {
     alumno_t YO = AlumnoCrear("Martín", "Gareca", 43291421);
+    alumno_t YOnt = AlumnoCrear("Pepe", "Ganem", 12345678);
     char buffer[100];
     int resultado;
 
-    if (YO == NULL) {
+    if (YO == NULL || YOnt == NULL) {
         printf("Error al crear el alumno\n");
         return -1;
     }
     
     resultado = AlumnoSerializar(YO, buffer, sizeof(buffer));
     
+    if (resultado > 0) {
+        printf("Serializado: %s\n", buffer);
+        printf("Cantidad de caracteres escritos: %d\n", resultado);
+    } else {
+        printf("Error al serializar\n");
+    }
+
+    // Serializar el segundo alumno
+    resultado = AlumnoSerializar(YOnt, buffer, sizeof(buffer) - sizeof(YO));
+
     if (resultado > 0) {
         printf("Serializado: %s\n", buffer);
         printf("Cantidad de caracteres escritos: %d\n", resultado);
